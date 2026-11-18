@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Media Player Overlay</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        background: transparent;
+        overflow: hidden;
+      }
+
+      /* Every visual cue is placed against this, so positions are viewport-relative. */
+      #stage {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+      }
+
+      /* Placement and size are set per cue in visuals.js. */
+      .media-item {
+        position: absolute;
+        display: block;
+        object-fit: contain;
+        border: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="stage"></div>
+    <script type="text/javascript" src="/shared/osc-bundle.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/visuals.js"></script>
+    <script src="js/clips.js"></script>
+    <script src="js/player.js"></script>
+    <script src="js/osc.js"></script>
+  </body>
+</html>

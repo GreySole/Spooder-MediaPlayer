@@ -1,0 +1,139 @@
+{
+  "form": {
+    "events": {
+      "label": "Legacy Event Map",
+      "description": "Pre-node configuration, kept so older setups keep firing. New events should use the Play Media node in the event editor, where the asset is picked on the node itself.",
+      "type": "subform",
+      "form": {
+        "keyname": {
+          "label": "Event Key",
+          "type": "text",
+          "options": {
+            "json-friendly": true
+          }
+        },
+        "media_type": {
+          "label": "Media Type",
+          "type": "select",
+          "options": {
+            "selections": {
+              "image": "Image",
+              "sound": "Sound",
+              "video": "Video"
+            }
+          }
+        },
+        "image": {
+          "label": "Image",
+          "type": "asset",
+          "showif": {
+            "variable": "media_type",
+            "condition": "equals",
+            "value": "image"
+          },
+          "options": {
+            "assetType": "image",
+            "folder": "image"
+          }
+        },
+        "sound": {
+          "label": "Sound",
+          "type": "asset",
+          "showif": {
+            "variable": "media_type",
+            "condition": "equals",
+            "value": "sound"
+          },
+          "options": {
+            "assetType": "sound",
+            "folder": "sound"
+          }
+        },
+        "sound_volume": {
+          "label": "Volume",
+          "type": "range",
+          "showif": {
+            "variable": "media_type",
+            "condition": "equals",
+            "value": "sound"
+          },
+          "options": {
+            "min": 0.0,
+            "max": 1.0,
+            "step": 0.1
+          }
+        },
+        "video": {
+          "label": "Video",
+          "type": "asset",
+          "showif": {
+            "variable": "media_type",
+            "condition": "equals",
+            "value": "video"
+          },
+          "options": {
+            "assetType": "video",
+            "folder": "video"
+          }
+        },
+        "duration": {
+          "label": "Duration (seconds)",
+          "description": "0 plays a video to its end and shows an image for 5 seconds.",
+          "type": "number",
+          "showif": {
+            "variable": "media_type",
+            "condition": "notEquals",
+            "value": "sound"
+          }
+        },
+        "position": {
+          "label": "Position",
+          "type": "select",
+          "showif": {
+            "variable": "media_type",
+            "condition": "notEquals",
+            "value": "sound"
+          },
+          "options": {
+            "selections": {
+              "center": "Center",
+              "top-left": "Top Left",
+              "top": "Top",
+              "top-right": "Top Right",
+              "left": "Left",
+              "right": "Right",
+              "bottom-left": "Bottom Left",
+              "bottom": "Bottom",
+              "bottom-right": "Bottom Right",
+              "random": "Random"
+            }
+          }
+        },
+        "size": {
+          "label": "Size (%)",
+          "type": "range",
+          "showif": {
+            "variable": "media_type",
+            "condition": "notEquals",
+            "value": "sound"
+          },
+          "options": {
+            "min": 1,
+            "max": 100,
+            "step": 1
+          },
+          "description": "How much of the screen it may fill, as a percentage of its width and height. It is scaled to fit while keeping its shape, so 100 fills the screen as far as its proportions allow."
+        }
+      }
+    }
+  },
+  "defaults": {
+    "events": {
+      "media_type": "sound",
+      "sound_volume": 1.0,
+      "duration": 0,
+      "position": "center",
+      "size": 50
+    }
+  }
+}

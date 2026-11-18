@@ -1,0 +1,17 @@
+{
+  "name": "media_player",
+  "display_name": "Media Player",
+  "version": "2.0.0",
+  "spooder-version": "0.6",
+  "description": "Play sounds, images, videos and Twitch clips on an overlay.",
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "tsc --outDir js"
+  },
+  "author": "Grey Sole",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "@vercel/ncc": "^0.45.0",
+    "typescript": "^5.8.3"
+  }
+}

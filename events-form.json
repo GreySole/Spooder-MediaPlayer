@@ -1,0 +1,252 @@
+{
+  "play_media": {
+    "label": "Play Media",
+    "nodeWidth": 320,
+    "form": {
+      "media_type": {
+        "label": "Media Type",
+        "type": "select",
+        "options": {
+          "selections": {
+            "sound": "Sound",
+            "image": "Image",
+            "video": "Video"
+          }
+        }
+      },
+      "sound": {
+        "label": "Sound",
+        "type": "asset",
+        "showif": {
+          "variable": "media_type",
+          "condition": "equals",
+          "value": "sound"
+        },
+        "options": {
+          "assetType": "sound",
+          "folder": "sound"
+        }
+      },
+      "image": {
+        "label": "Image",
+        "type": "asset",
+        "showif": {
+          "variable": "media_type",
+          "condition": "equals",
+          "value": "image"
+        },
+        "options": {
+          "assetType": "image",
+          "folder": "image"
+        }
+      },
+      "video": {
+        "label": "Video",
+        "type": "asset",
+        "showif": {
+          "variable": "media_type",
+          "condition": "equals",
+          "value": "video"
+        },
+        "options": {
+          "assetType": "video",
+          "folder": "video"
+        }
+      },
+      "volume": {
+        "label": "Volume",
+        "description": "0 to 1. Silent images ignore this.",
+        "type": "number",
+        "showif": {
+          "variable": "media_type",
+          "condition": "notEquals",
+          "value": "image"
+        }
+      },
+      "duration": {
+        "label": "Duration (seconds)",
+        "description": "How long it stays on screen. 0 plays a video to its end and shows an image for 5 seconds.",
+        "type": "number",
+        "showif": {
+          "variable": "media_type",
+          "condition": "notEquals",
+          "value": "sound"
+        }
+      },
+      "position": {
+        "label": "Position",
+        "type": "select",
+        "showif": {
+          "variable": "media_type",
+          "condition": "notEquals",
+          "value": "sound"
+        },
+        "options": {
+          "selections": {
+            "center": "Center",
+            "top-left": "Top Left",
+            "top": "Top",
+            "top-right": "Top Right",
+            "left": "Left",
+            "right": "Right",
+            "bottom-left": "Bottom Left",
+            "bottom": "Bottom",
+            "bottom-right": "Bottom Right",
+            "random": "Random"
+          }
+        }
+      },
+      "size": {
+        "label": "Size (%)",
+        "description": "How much of the screen it may fill, as a percentage of its width and height. It is scaled to fit while keeping its shape, so 100 fills the screen as far as its proportions allow.",
+        "type": "number",
+        "showif": {
+          "variable": "media_type",
+          "condition": "notEquals",
+          "value": "sound"
+        }
+      }
+    },
+    "defaults": {
+      "media_type": "sound",
+      "sound": "",
+      "image": "",
+      "video": "",
+      "volume": 1,
+      "duration": 0,
+      "position": "center",
+      "size": 50
+    }
+  },
+  "play_url": {
+    "label": "Play URL",
+    "description": "Plays a Twitch clip, YouTube, Vimeo or Streamable video from its link. Requires the overlay to be opened from the public overlay URL (or localhost) for Twitch.",
+    "nodeWidth": 320,
+    "form": {
+      "url": {
+        "label": "URL",
+        "description": "Link to the video. Wire this from a trigger or a command argument.",
+        "type": "text",
+        "portType": "string"
+      },
+      "duration": {
+        "label": "Duration (seconds)",
+        "description": "How long it stays on screen. These embeds can't report when they end, so 0 uses 30 seconds.",
+        "type": "number"
+      },
+      "muted": {
+        "label": "Muted",
+        "description": "The embeds have no volume control, only on or off.",
+        "type": "boolean"
+      },
+      "position": {
+        "label": "Position",
+        "type": "select",
+        "options": {
+          "selections": {
+            "center": "Center",
+            "top-left": "Top Left",
+            "top": "Top",
+            "top-right": "Top Right",
+            "left": "Left",
+            "right": "Right",
+            "bottom-left": "Bottom Left",
+            "bottom": "Bottom",
+            "bottom-right": "Bottom Right",
+            "random": "Random"
+          }
+        }
+      },
+      "size": {
+        "label": "Size (%)",
+        "description": "How much of the screen it may fill, as a percentage of its width and height. It is scaled to fit while keeping its shape, so 100 fills the screen as far as its proportions allow.",
+        "type": "number"
+      }
+    },
+    "defaults": {
+      "url": "",
+      "duration": 30,
+      "muted": false,
+      "position": "center",
+      "size": 60
+    }
+  },
+  "play_clip": {
+    "label": "Play Clip",
+    "description": "Looks up one of a Twitch channel's clips and plays it. Uses the connected Twitch account, no extra permissions needed.",
+    "nodeWidth": 320,
+    "form": {
+      "username": {
+        "label": "Channel",
+        "description": "Whose clips to play. Wire this from a trigger's Username output.",
+        "type": "text",
+        "portType": "string"
+      },
+      "selection": {
+        "label": "Pick",
+        "type": "select",
+        "options": {
+          "selections": {
+            "random": "Random",
+            "most_viewed": "Most Viewed",
+            "most_recent": "Most Recent",
+            "featured": "Featured"
+          }
+        }
+      },
+      "period_days": {
+        "label": "Within Last (days)",
+        "description": "0 searches the channel's whole history.",
+        "type": "number"
+      },
+      "max_duration": {
+        "label": "Max Length (seconds)",
+        "description": "Skips clips longer than this. 0 allows any length.",
+        "type": "number"
+      },
+      "muted": {
+        "label": "Muted",
+        "description": "The Twitch embed has no volume control, only on or off.",
+        "type": "boolean"
+      },
+      "position": {
+        "label": "Position",
+        "type": "select",
+        "options": {
+          "selections": {
+            "center": "Center",
+            "top-left": "Top Left",
+            "top": "Top",
+            "top-right": "Top Right",
+            "left": "Left",
+            "right": "Right",
+            "bottom-left": "Bottom Left",
+            "bottom": "Bottom",
+            "bottom-right": "Bottom Right",
+            "random": "Random"
+          }
+        }
+      },
+      "size": {
+        "label": "Size (%)",
+        "description": "How much of the screen it may fill, as a percentage of its width and height. It is scaled to fit while keeping its shape, so 100 fills the screen as far as its proportions allow.",
+        "type": "number"
+      }
+    },
+    "defaults": {
+      "username": "",
+      "selection": "random",
+      "period_days": 0,
+      "max_duration": 45,
+      "muted": false,
+      "position": "center",
+      "size": 60
+    }
+  },
+  "stop_media": {
+    "label": "Stop All Media",
+    "description": "Silences every sound and clears everything on screen.",
+    "form": {},
+    "defaults": {}
+  }
+}
